@@ -17,6 +17,17 @@ La estructura inicial fue creada y el contrato mínimo de Market Data está impl
 
 - Implementado `MarketData` en `src/market_data.py`.
 - Añadidos tests unitarios en `tests/test_market_data.py`.
+- Implementado `MarketDataSeries` en `src/market_data_series.py`.
+- Añadidos tests unitarios en `tests/test_market_data_series.py`.
+- Implementada la utilidad `calculate_price_change` en `src/price_change.py`.
+- Añadidos tests unitarios en `tests/test_price_change.py`.
+
+## Decisiones de componentes de Market Data
+
+- La serie comienza vacía y recibe observaciones mediante `add`.
+- La colección se mantiene privada, ordenada por timestamp y solo permite un instrumento.
+- La consulta se limita a longitud e indexación para mantener el contrato pequeño.
+- `calculate_price_change` devuelve cambio absoluto y porcentual como una tupla de `Decimal`.
 
 ## Próximos pasos
 
