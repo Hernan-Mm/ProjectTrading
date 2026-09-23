@@ -1,5 +1,7 @@
 """Ordered collection of market data observations."""
 
+from collections.abc import Iterator
+
 from src.market_data import MarketData
 
 
@@ -24,6 +26,15 @@ class MarketDataSeries:
 
     def __len__(self) -> int:
         return len(self._observations)
+
+    def __iter__(self) -> Iterator[MarketData]:
+        return iter(tuple(self._observations))
+
+    @property
+    def latest(self) -> MarketData | None:
+        if not self._observations:
+            return None
+        return self._observations[-1]
 
     def __getitem__(self, index: int) -> MarketData:
         if not isinstance(index, int):

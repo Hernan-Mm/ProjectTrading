@@ -42,6 +42,31 @@ class MarketDataSeriesTests(unittest.TestCase):
         self.assertIs(series[0], earlier)
         self.assertIs(series[1], later)
 
+    def test_iterates_over_observations_in_chronological_order(self) -> None:
+        series = MarketDataSeries()
+        later = self.make_observation(2)
+        earlier = self.make_observation(1)
+
+        series.add(later)
+        series.add(earlier)
+
+        self.assertEqual(list(series), [earlier, later])
+
+    def test_latest_returns_the_most_recent_observation(self) -> None:
+        series = MarketDataSeries()
+        earlier = self.make_observation(1)
+        later = self.make_observation(2)
+
+        series.add(later)
+        series.add(earlier)
+
+        self.assertIs(series.latest, later)
+
+    def test_latest_returns_none_for_an_empty_series(self) -> None:
+        series = MarketDataSeries()
+
+        self.assertIsNone(series.latest)
+
     def test_rejects_non_market_data_observation(self) -> None:
         series = MarketDataSeries()
 
@@ -61,6 +86,16 @@ class MarketDataSeriesTests(unittest.TestCase):
         series.add(observation)
 
         self.assertIs(series[0], observation)
+
+    def test_iteration_uses_a_snapshot_of_the_series(self) -> None:
+        series = MarketDataSeries()
+        observation = self.make_observation(1)
+        series.add(observation)
+
+        observations = iter(series)
+        series.add(self.make_observation(2))
+
+        self.assertEqual(list(observations), [observation])
 
     def test_does_not_allow_external_collection_mutation(self) -> None:
         series = MarketDataSeries()
