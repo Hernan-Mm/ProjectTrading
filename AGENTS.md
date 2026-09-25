@@ -71,11 +71,12 @@ El estado real del repositorio es la autoridad.
 
 Antes de realizar cualquier trabajo, el agente debe inspeccionar:
 
-1. `AGENTS.md`
-2. `docs/memory.md`
-3. `ROADMAP.md`
-4. La SPEC correspondiente.
-5. La implementación y los tests actuales.
+1. `CONSTITUTION.md`
+2. `AGENTS.md`
+3. `docs/memory.md`
+4. `ROADMAP.md`
+5. La SPEC correspondiente.
+6. La implementación y los tests actuales.
 
 Cuando se trabaje dentro de un subdirectorio, también se debe comprobar si existe un `AGENTS.md` más específico aplicable a ese ámbito.
 
@@ -137,34 +138,33 @@ No crear carpetas vacías o componentes arquitectónicos solamente porque aparec
 
 # 6. Flujo de trabajo
 
-Toda tarea significativa debe seguir este flujo:
+Todo trabajo debe seguir este flujo operativo obligatorio:
 
 ```text
-CONTEXTO
+CONSTITUCIÓN
 ↓
-TAREA
+SPEC
+↓
+CLARIFICACIÓN
 ↓
 PLAN
 ↓
+TAREAS
+↓
 IMPLEMENTACIÓN
 ↓
-TEST
+VALIDACIÓN
 ↓
-REVISIÓN
-↓
-DOCUMENTACIÓN
-↓
-GIT
+CAMBIO
 ```
 
-Antes de implementar:
+Dentro de `IMPLEMENTACIÓN`, el orden es siempre:
 
-1. Comprender la tarea.
-2. Inspeccionar el repositorio actual.
-3. Leer la documentación relevante.
-4. Identificar la SPEC correspondiente.
-5. Determinar el cambio mínimo necesario.
-6. Comunicar brevemente el plan.
+```text
+una tarea → tests → implementación → validación
+```
+
+Antes de implementar, se deben resolver las ambigüedades relevantes, definir un plan y dividir el trabajo en tareas pequeñas y verificables.
 
 Durante la implementación:
 
@@ -269,8 +269,27 @@ Antes de implementar una funcionalidad importante:
 2. leerla;
 3. comprobar el alcance definido;
 4. identificar los criterios de aceptación;
-5. implementar solamente lo necesario;
-6. probar los criterios de aceptación.
+5. clarificar las ambigüedades relevantes;
+6. planificar y dividir la funcionalidad en tareas;
+7. definir primero los tests de cada tarea;
+8. implementar solamente lo necesario;
+9. validar los criterios de aceptación.
+
+Cuando exista un cambio de comportamiento, el orden obligatorio es:
+
+```text
+cambio necesario
+    ↓
+actualizar/crear SPEC
+    ↓
+tests
+    ↓
+código
+    ↓
+validación
+```
+
+La SPEC debe actualizarse o crearse antes de modificar el código. No se debe implementar un cambio de comportamiento que todavía no esté especificado.
 
 Si no existe una SPEC necesaria:
 
@@ -309,29 +328,7 @@ El proyecto también tiene como objetivo desarrollar habilidades prácticas de A
 
 Por lo tanto, los agentes deben utilizarse de manera intencional y no únicamente como generadores de código.
 
-Flujo recomendado:
-
-```text
-DEFINIR
-↓
-PROPORCIONAR CONTEXTO
-↓
-CONSULTAR SPEC
-↓
-DEFINIR RESTRICCIONES
-↓
-DELEGAR
-↓
-IMPLEMENTAR
-↓
-REVISAR
-↓
-PROBAR
-↓
-VALIDAR
-↓
-DOCUMENTAR
-```
+Toda asistencia de IA debe respetar el flujo SDD obligatorio definido en la sección 6.
 
 Nunca aceptar código generado por IA ciegamente.
 
