@@ -15,6 +15,9 @@ def calculate_price_change(
     if initial.instrument != final.instrument:
         raise ValueError("observations must use the same instrument")
 
+    if initial.timestamp > final.timestamp:
+        raise ValueError("initial observation must not be after final observation")
+
     initial_price = Decimal(str(initial.price))
     final_price = Decimal(str(final.price))
     absolute_change = final_price - initial_price

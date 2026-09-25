@@ -30,6 +30,7 @@ La estructura inicial fue creada y el contrato mínimo de Market Data está impl
 - `latest` devuelve la observación más reciente o `None` cuando la serie está vacía; se elige ausencia explícita porque una serie vacía es un estado normal y no una condición excepcional.
 - La consulta se limita a longitud, indexación, iteración y observación más reciente para mantener el contrato pequeño.
 - `calculate_price_change` devuelve cambio absoluto y porcentual como una tupla de `Decimal`.
+- `calculate_price_change` acepta timestamps iguales o posteriores y rechaza con `ValueError` una observación final anterior a la inicial.
 
 ## Próximos pasos
 

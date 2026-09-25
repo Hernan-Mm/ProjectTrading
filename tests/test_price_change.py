@@ -59,6 +59,22 @@ class PriceChangeTests(unittest.TestCase):
         self.assertEqual(absolute_change, Decimal("0"))
         self.assertEqual(percentage_change, Decimal("0"))
 
+    def test_allows_observations_with_equal_timestamps(self) -> None:
+        initial = self.make_observation(100)
+        final = self.make_observation(125)
+
+        absolute_change, percentage_change = calculate_price_change(initial, final)
+
+        self.assertEqual(absolute_change, Decimal("25"))
+        self.assertEqual(percentage_change, Decimal("25"))
+
+    def test_rejects_final_observation_before_initial(self) -> None:
+        initial = self.make_observation(100)
+        final = self.make_observation(125, -1)
+
+        with self.assertRaises(ValueError):
+            calculate_price_change(initial, final)
+
     def test_rejects_incorrect_types(self) -> None:
         observation = self.make_observation(100)
 
